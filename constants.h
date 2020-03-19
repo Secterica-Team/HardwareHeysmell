@@ -15,13 +15,13 @@
 /**
  * CONSTANTS FOR HUMIDITY SENSOR DHT
  * You can change the type whether you use another dht
- * The basic pin is 2, better not use 15
+ * The basic pin is any
+ * , better not use 15
  */
 #ifdef HUMIDITY
 
 #define DHTTYPE DHT11
-#define DHTPIN  2
-
+#define DHTPIN  3
 #endif
 /**
  * CONSTANTS FOR BMP-180 PRESSURE
@@ -43,7 +43,7 @@
  */
 
 #ifdef DUST
-#define DUST_PIN 8
+#define DUST_PIN 16
 #endif
 
 #ifdef MQ2

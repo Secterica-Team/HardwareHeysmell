@@ -41,7 +41,7 @@ class TransmissionModule {
   public:
   void setup_wifi();
   void reconnect();
-  void sendMessage(char* topic, char* message);
+  void sendMessage(char* topic, const char* message);
   void init();
   static void callback(char* topic, byte* message, unsigned int length);
 

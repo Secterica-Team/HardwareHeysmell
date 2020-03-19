@@ -19,7 +19,7 @@ double DustSensor::dustConcentration(){
      delay(1);
   }
   ratio = lowpulseoccupancy/(sampletime_ms*10.0);  
-  concentration = 1.1*pow(ratio,3)-3.8*pow(ratio,2)+520*ratio+0.62; 
+  concentration = 1.1 * pow(ratio, 3) - 3.8 * pow(ratio, 2) + 520 * ratio + 0.62; 
   lowpulseoccupancy = 0;
   starttime = millis();
   return concentration;

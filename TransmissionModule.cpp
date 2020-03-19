@@ -13,14 +13,9 @@ void TransmissionModule::setup_wifi(){
   // We start by connecting to a WiFi network
   Serial.println();
   Serial.print("Connecting to ");
-  Serial.println("Агсочс");
+  Serial.println(NETWORK_SSID);
 
-  WiFi.begin("TheFatGrayCat", "IDontLikeWhiskas");
-
-//  while (WiFi.status() != WL_CONNECTED) {
-//    delay(5000);
-//    //Serial.print(".");
-//  }
+  WiFi.begin(NETWORK_SSID, PASSWORD);
 
   Serial.println("");
   Serial.println("WiFi connected");
@@ -33,7 +28,7 @@ void TransmissionModule::setup_wifi(){
  * Sends a message to the client
  */
 
-void TransmissionModule::sendMessage(char* topic, char* message){
+void TransmissionModule::sendMessage(char* topic,const char* message){
   this -> client.publish(topic, message);
   Serial.println("Trying to publish...");
   Serial.println();
@@ -45,7 +40,6 @@ TransmissionModule::TransmissionModule(){
     this -> client = PubSubClient(this -> eClient);
     this -> setup_wifi();
     client.setServer(MQTT_SERVER, 1883);
-   
   }
 
 

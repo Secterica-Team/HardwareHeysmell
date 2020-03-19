@@ -10,7 +10,7 @@
 #ifndef AIRQUALITY_HUMIDITYSENSOR_H
 #define AIRQUALITY_HUMIDITYSENSOR_H
 
-#include "constants.c"
+#include "constants.h"
 
 
 class HumiditySensor{
