@@ -2,12 +2,14 @@
 #include "HumiditySensor.h"
 #include "TransmissionModule.h"
 #include "DustSensor.h"
+#include "GasReader.h"
 
 JSONVar messageBuffer;
 
 HumiditySensor *humiditySensor = new HumiditySensor;
 TransmissionModule transmissionModule;
 DustSensor *dust = new DustSensor;
+GasReader gasReader;
 
 void setup() {
    Serial.begin(9600);
@@ -20,13 +22,15 @@ void loop() {
    double temperature = (humiditySensor -> getTemperature());
    double humidity = (humiditySensor -> getHumidity());
    double dustConc = dust -> dustConcentration();
-   Serial.println(" %");
-   
-   
+   Serial.println(dustConc);
    delay(300);
-   messageBuffer["loc"] = "Chernivtsi";
-   messageBuffer["temp"] = temperature;
-   messageBuffer["hu"] = humidity;
+   messageBuffer["id"] = "CZ1";
+   messageBuffer["hum"] = humidity;
+   messageBuffer["tmp"] = temperature;
+   messageBuffer["co"] = gasReader.readGasValue();
+   messageBuffer["co2"] = 10;
+   messageBuffer["lpg"] = 300;
+   messageBuffer["smk"] = 20;
    messageBuffer["dus"] = dustConc;
    String stringToSend = JSON.stringify(messageBuffer);
    
