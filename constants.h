@@ -7,7 +7,8 @@
 
 #define HUMIDITY TRUE
 #define WIFITRANSMITTER TRUE
-#define DUST TRUE
+#define DUSTPIN TRUE
+#define MQ2 TRUE
 
 #pragma once
 
@@ -42,11 +43,12 @@
  * CONSTANTS FOR PPD42 
  */
 
-#ifdef DUST
+#ifdef DUSTPIN
 #define DUST_PIN 16
 #endif
 
 #ifdef MQ2
+#define GAS_MQ2_PIN 25
 #endif
 
 #ifdef MQ9B
