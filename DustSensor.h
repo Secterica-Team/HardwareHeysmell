@@ -14,7 +14,7 @@ class DustSensor {
   private:
   unsigned long duration;
   unsigned long starttime;
-  unsigned long sampletime_ms = 2000; 
+  unsigned long sampletime_ms = 30000; 
   unsigned long lowpulseoccupancy = 0;
  
   public:
