@@ -1,16 +1,8 @@
-#include <ETH.h>
-#include <WiFi.h>
-#include <WiFiAP.h>
-#include <WiFiClient.h>
-#include <WiFiGeneric.h>
-#include <WiFiMulti.h>
-#include <WiFiScan.h>
-#include <WiFiServer.h>
-#include <WiFiSTA.h>
-#include <WiFiType.h>
-#include <WiFiUdp.h>
 
-#include <dummy.h>
+#include <WiFi.h>
+#include <WiFiClient.h>
+#include <WiFiServer.h>
+#include <WiFiUdp.h>
 
 #ifndef AIRQUALITY_TRANSMISSIONMODULE_H
 #define AIRQUALITY_TRANSMISSIONMODULE_H
