@@ -12,6 +12,7 @@
 
 #pragma once
 
+extern int message_sent;
 
 /**
  * CONSTANTS FOR HUMIDITY SENSOR DHT
@@ -22,7 +23,7 @@
 #ifdef HUMIDITY
 
 #define DHTTYPE DHT11
-#define DHTPIN  3
+#define DHTPIN  2
 #endif
 /**
  * CONSTANTS FOR BMP-180 PRESSURE

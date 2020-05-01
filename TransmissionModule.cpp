@@ -84,6 +84,7 @@ void TransmissionModule::callback(char* topic, byte* message, unsigned int lengt
     Serial.print((char)message[i]);
     messageTemp += (char)message[i];
   }
+  message_sent = 1;
   Serial.println();
   }
 //}

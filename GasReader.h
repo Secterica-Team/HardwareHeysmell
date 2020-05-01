@@ -9,9 +9,11 @@
 
 
 class GasReader {
-  
-  public:
-  long readGasValue();
+   public:
+  int get_lpg_concentration();
+  int get_co_concentration();
+  int get_smk_concentration();
+  int rval;
   
 };
 
