@@ -24,19 +24,21 @@ void loop() {
    double temperature = (humiditySensor -> getTemperature());
    double humidity = (humiditySensor -> getHumidity());
    double dustConc = dust -> dustConcentration();
-   gasReader -> rval = analogRead(0);
-   Serial.println(analogRead(0));
-   Serial.println(dustConc);
+   Serial.println(gasReader -> get_co_concentration(analogRead(34)));
+   Serial.println(analogRead(34));
    delay(300);
    messageBuffer["id"] = "CZ1";
-   messageBuffer["hum"] = 43; //humidity;
-   messageBuffer["tmp"] = 23;// temperature;
-   messageBuffer["co"] = 1;//gasReader -> get_co_concentration();
-   messageBuffer["co2"] = 115; //300 + gasReader -> get_co_concentration()/2;
-   messageBuffer["lpg"] = 0; //gasReader ->get_lpg_concentration();
-   messageBuffer["smk"] = 1;//gasReader -> get_smk_concentration();
+   messageBuffer["hum"] = humidity;
+   messageBuffer["tmp"] = temperature;
+   messageBuffer["co"] = gasReader -> get_co_concentration(analogRead(34));
+   messageBuffer["co2"] = 300 + gasReader -> get_co_concentration(analogRead(34))/2;
+   messageBuffer["lpg"] = gasReader ->get_lpg_concentration(analogRead(34));
+   messageBuffer["smk"] = gasReader -> get_smk_concentration(analogRead(34));
    messageBuffer["dus"] = dustConc;
+   messageBuffer["aqi"] = max(dust -> get_aqi(dustConc), gasReader -> get_aqi(gasReader -> get_co_concentration(analogRead(34))));
    String stringToSend = JSON.stringify(messageBuffer);
+
+   Serial.println(analogRead(34));
    
    
 
