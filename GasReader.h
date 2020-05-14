@@ -10,10 +10,11 @@
 
 class GasReader {
    public:
-  int get_lpg_concentration();
-  int get_co_concentration();
-  int get_smk_concentration();
+  int get_lpg_concentration(int val);
+  int get_co_concentration(int val);
+  int get_smk_concentration(int val);
   int rval;
+  int get_aqi(int concentration);
   
 };
 
