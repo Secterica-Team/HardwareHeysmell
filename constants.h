@@ -23,7 +23,7 @@ extern int message_sent;
 #ifdef HUMIDITY
 
 #define DHTTYPE DHT11
-#define DHTPIN  2
+#define DHTPIN  18
 #endif
 /**
  * CONSTANTS FOR BMP-180 PRESSURE
@@ -49,7 +49,7 @@ extern int message_sent;
 #endif
 
 #ifdef MQ2
-#define GAS_MQ2_PIN 25
+#define GAS_MQ2_PIN 27
 #endif
 
 #ifdef MQ9B
