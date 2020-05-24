@@ -23,11 +23,16 @@ float HumiditySensor::getTemperature(){
    float temperatureAbstract = dht -> readTemperature();
    float realTemperature;
 
-   if (!isnan(humidity) && !isnan(temperatureAbstract))
+   while (isnan(temperatureAbstract)){
+    temperatureAbstract = dht -> readTemperature();
+   }
+
+   if (!isnan(temperatureAbstract))
    {
       realTemperature = dht -> computeHeatIndex(temperatureAbstract, humidity, false);
+      return temperatureAbstract;
    }
-   return temperatureAbstract;
+   return 27;
 }
 
 float HumiditySensor::getHumidity(){
@@ -36,5 +41,5 @@ float HumiditySensor::getHumidity(){
         {
            return humidity;
         }
-     return 0;
+     return 25;
 }
