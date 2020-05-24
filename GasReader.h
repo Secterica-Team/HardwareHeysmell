@@ -5,6 +5,7 @@
 #ifndef PERMUTATION_GEN_GASREADER_H
 #define PERMUTATION_GEN_GASREADER_H
 #include "constants.h"
+#include <Arduino.h>
 #pragma once
 
 

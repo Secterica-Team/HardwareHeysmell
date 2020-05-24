@@ -1,10 +1,10 @@
-#include <Wire.h>
+
 #include "GasReader.h"
 
 
 /************************Hardware Related Macros************************************/
 #define         MQ_PIN                       (34)     //define which analog input channel you are going to use
-#define         RL_VALUE                     (2.5)     //define the load resistance on the board, in kilo ohms
+#define         RL_VALUE                     (2.7)     //define the load resistance on the board, in kilo ohms
 #define         RO_CLEAN_AIR_FACTOR          (10)  //RO_CLEAR_AIR_FACTOR=(Sensor resistance in clean air)/RO,
                                                      //which is derived from the chart in datasheet
 
@@ -16,20 +16,19 @@
 #define         GAS_CO                       (1)
 #define         GAS_SMOKE                    (2)
 /*****************************Globals***********************************************/
-float           LPGCurve[3]  =  {2.3,0.21,-0.47};
-float           COCurve[3]  =  {2.3,0.72,-0.34};    
-float           SmokeCurve[3] ={2.3,0.53,-0.44};                                                          
-float           Ro           =  0.4;
+float           COCurve[2]  =  {-3.46,4.725};  
+float           LPGCurve[2]  =  {-2.06, 2.794};                                                        
+float           SmokeCurve[2] ={-1.97, 2.89};                                                        
+float           Ro           =  3.2;
 int             read_value   =  0;               
 
 
 
 
-float MQResistanceCalculation(int raw_adc)
+float MQResistanceCalculation(float raw_adc)
 {
-  return ( ((float)RL_VALUE*(4095-raw_adc)/raw_adc));
+  return ( ((float)RL_VALUE*((6024-raw_adc)/raw_adc)));
 }
-
 
 float MQRead(int mq_pin)
 {
@@ -48,7 +47,8 @@ float MQRead(int mq_pin)
 
 int  MQGetPercentage(float rs_ro_ratio, float *pcurve)
 {
-  return (pow(10,( ((log(rs_ro_ratio)-pcurve[1])/pcurve[2]) + pcurve[0])));
+  
+  return (pow(10, ((log(rs_ro_ratio)*pcurve[0]) + pcurve[1])));
 }
 
 int MQGetGasPercentage(float rs_ro_ratio, int gas_id)
@@ -68,11 +68,12 @@ int MQGetGasPercentage(float rs_ro_ratio, int gas_id)
 
 int GasReader::get_lpg_concentration(int val){
   read_value = val;
-  return MQGetGasPercentage(MQRead(MQ_PIN)/Ro,GAS_LPG);
+  return MQGetGasPercentage((MQRead(MQ_PIN)/Ro),GAS_LPG);
 }
 
 int GasReader::get_co_concentration(int val){
   read_value = val;
+  Serial.println(read_value);
   return MQGetGasPercentage(MQRead(MQ_PIN)/Ro,GAS_CO);
 }
 
@@ -106,8 +107,9 @@ int GasReader::get_aqi(int concentration){
         // Ip =  [(Ihi-Ilow)/(BPhi-BPlow)] (Cp-BPlow)+Ilow,
         return ((aqi[i].lhigh - aqi[i].llow) / (aqi[i].chigh - aqi[i].clow)) * 
             (concentration - aqi[i].clow) + aqi[i].llow;
-    }
+    } else if (i == 6) return 500;
   }
+  
 
   return 0;
 }
